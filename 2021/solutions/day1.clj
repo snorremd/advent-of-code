@@ -31,3 +31,5 @@
      (partition 2 1)
      (filter #(> (second %) (first %)))
      count)
+
+;; Teating lazygit
