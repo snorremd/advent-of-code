@@ -27,7 +27,8 @@
                 #(key (apply min-key val %))))
      (apply map vector) ;; Split into vectors of most common and least common
      (map (comp #(Integer/parseInt % 2) (partial string/join ""))) ;; Turn into numbers
-     (apply *))
+     (apply *)
+     (println "Part 1:"))
 
 ;; Part 2
 
@@ -68,5 +69,5 @@
   ((juxt #(filtered-digits max-key-fn % 0)
          #(filtered-digits min-key-fn % 0)) $)
   (map #(Integer/parseInt % 2) $)
-  (apply * $))
-
+  (apply * $)
+  (println "Part 2:"))

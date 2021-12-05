@@ -20,7 +20,8 @@
      (map read-string)
      (partition 2 1)
      (filter #(> (second %) (first %)))
-     count)
+     count
+     (println "Part 1:"))
 
 
 (->> input
@@ -30,6 +31,5 @@
      (map #(apply + %))
      (partition 2 1)
      (filter #(> (second %) (first %)))
-     count)
-
-;; Teating lazygit
+     count
+     (println "Part 2:"))

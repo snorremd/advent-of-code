@@ -74,35 +74,37 @@
 ;; Part 1
 ;; Loop recur until a match is found and calculate the score
 
-(loop [boards (input->boards puzzle-input)
-       draws (drop 5 (input->draws puzzle-input))
-       curr-draws (take 5 (input->draws puzzle-input))]
-  (let [matching (filter (partial match? (set curr-draws)) boards)]
-    (if-not (empty? matching)
-      (* (first curr-draws)
-         (apply + (set/difference (->> matching first :rows (apply concat) set)
-                                  (set curr-draws))))
-      (recur boards
-             (rest draws)
-             (conj curr-draws (first draws))))))
+(->> (loop [boards (input->boards puzzle-input)
+            draws (drop 5 (input->draws puzzle-input))
+            curr-draws (take 5 (input->draws puzzle-input))]
+       (let [matching (filter (partial match? (set curr-draws)) boards)]
+         (if-not (empty? matching)
+           (* (first curr-draws)
+              (apply + (set/difference (->> matching first :rows (apply concat) set)
+                                       (set curr-draws))))
+           (recur boards
+                  (rest draws)
+                  (conj curr-draws (first draws))))))
+     (println "Part 1:"))
 
 
 ;; Part 2
-(loop [boards (input->boards puzzle-input)
-       draws (drop 5 (input->draws puzzle-input))
-       curr-draws (vec (take 5 (input->draws puzzle-input)))
-       winning []]
-  (if (or (empty? draws) (empty? boards)) ;; Exhausted the possible draws or boards
-    (* (-> winning last :curr-draws last)
-       (apply + (set/difference (->> winning last :board :rows (apply concat) set)
-                                (->> winning last :curr-draws set))))
-    (let [winning-boards (filter (partial match? (set curr-draws)) boards)]
-      (recur (filter (fn [board] (not (some #(= % board) winning-boards))) boards)
-             (rest draws)
-             (conj curr-draws (first draws))
-             (concat winning (map (fn [board] {:curr-draws curr-draws
-                                               :board board})
-                                  winning-boards))))))
+(->> (loop [boards (input->boards puzzle-input)
+            draws (drop 5 (input->draws puzzle-input))
+            curr-draws (vec (take 5 (input->draws puzzle-input)))
+            winning []]
+       (if (or (empty? draws) (empty? boards)) ;; Exhausted the possible draws or boards
+         (* (-> winning last :curr-draws last)
+            (apply + (set/difference (->> winning last :board :rows (apply concat) set)
+                                     (->> winning last :curr-draws set))))
+         (let [winning-boards (filter (partial match? (set curr-draws)) boards)]
+           (recur (filter (fn [board] (not (some #(= % board) winning-boards))) boards)
+                  (rest draws)
+                  (conj curr-draws (first draws))
+                  (concat winning (map (fn [board] {:curr-draws curr-draws
+                                                    :board board})
+                                       winning-boards))))))
+     (println "Part 2:"))
 
 
 ;; Rich comments to test out functionality

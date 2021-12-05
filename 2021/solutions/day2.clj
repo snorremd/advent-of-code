@@ -25,7 +25,8 @@ forward 2")
                  "up" [horizontal (- depth distance)]
                  "down" [horizontal (+ depth distance)]))
              [0 0])
-     (apply *))
+     (apply *)
+     (println "Part 1:"))
 
 
 ;; Task 2
@@ -41,4 +42,5 @@ forward 2")
                  "down" [horizontal depth (+ aim distance)]))
              [0 0 0])
      (butlast)
-     (apply *))
+     (apply *)
+     (println "Part 2:"))

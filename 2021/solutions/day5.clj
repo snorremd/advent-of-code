@@ -39,39 +39,32 @@
              (range y1 (inc y2))
              (range y1 (dec y2) -1))))))
 
+(defn solution
+  [f input]
+  (as-> input $
+    (string/split-lines $)
+    (map #(string/split % #" -> ") $)
+    (flatten $) ;; Simpler to work with flattened sequences
+    (map #(string/split % #",") $)
+    (flatten $)
+    (map parse-int $) ;; Convert flat list of strings to list of integers
+    (partition 4 $)
+    (map f $)
+    (filter (comp not nil?) $)
+    (apply concat $)
+    (frequencies $)
+    (filter #(-> % val (>= 2)) $)
+    (count $)))
+
 ;; Task 1
 
-(as-> input $
-  (string/split-lines $)
-  (map #(string/split % #" -> ") $)
-  (flatten $) ;; Simpler to work with flattened sequences
-  (map #(string/split % #",") $)
-  (flatten $)
-  (map parse-int $) ;; Convert flat list of strings to list of integers
-  (partition 4 $)
-  (map (partial points->line-segments false) $)
-  (filter (comp not nil?) $)
-  (apply concat $)
-  (frequencies $)
-  (filter #(-> % val (>= 2)) $)
-  (count $))
+(->> (solution (partial points->line-segments false) input)
+     (println "Part 1:"))
 
 ;; Task 2
 
-(as-> input $
-  (string/split-lines $)
-  (map #(string/split % #" -> ") $)
-  (flatten $) ;; Simpler to work with flattened sequences
-  (map #(string/split % #",") $)
-  (flatten $)
-  (map parse-int $) ;; Convert flat list of strings to list of integers
-  (partition 4 $)
-  (map (partial points->line-segments true) $)
-  (filter (comp not nil?) $)
-  (apply concat $)
-  (frequencies $)
-  (filter #(-> % val (>= 2)) $)
-  (count $))
+(->> (solution (partial points->line-segments true) input)
+     (println "Part 2:"))
 
 
 ;; Rich comments
