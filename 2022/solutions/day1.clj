@@ -1,4 +1,4 @@
-(ns day1
+(ns day2
   (:require [clojure.string :as string]))
 
 (def sample-input
