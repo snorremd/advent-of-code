@@ -18,7 +18,7 @@
   (filter (fn [[x1 x2 y1 y2]]
             (or (and (>= x1 y1) (<= x2 y2)) 
                 (and (>= y1 x1) (<= y2 x2)))) $)
-  (count $) 
+  (count $)
   (println "Part 1:" $))
 
 (as-> input $

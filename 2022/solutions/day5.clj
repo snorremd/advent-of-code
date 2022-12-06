@@ -22,7 +22,7 @@ move 1 from 1 to 2")
 (defn stacks [i]
   (as-> i $
     (take-while #(re-find #"\[" %) $)
-    (map #(map get (repeat %) indices) $)
+    (map #(map get (repeat %) (indices i)) $)
     (apply map vector $) ;; Pivot the seqs so that we get the vertical stacks
     (mapv #(filter (partial not= \space) %) $))) ;; Remove empty spaces from stacks
 
