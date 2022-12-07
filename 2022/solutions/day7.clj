@@ -30,9 +30,9 @@ $ ls
 (def input (slurp "input/day7.txt"))
 
 (defn read-file-description
-    [line]
+    [line] 
     (let [[size filename] (string/split line #" ")]
-        [filename (read-string size)]))
+        {:path filename :size (read-string size)}))
 
 (defn go-to-child
   "Returns the zipper at the child node's location."
@@ -41,7 +41,7 @@ $ ls
        z/down
        (iterate z/right)
        (drop-while #(or (not (z/branch? %))
-                        (not= (-> % z/node first) child)))
+                        (not= (-> % z/node :path) child)))
        first))
 
 (defn run-cmd [zp line]
@@ -52,26 +52,29 @@ $ ls
         (go-to-child zp (string/replace line "$ cd " ""))
 
         (string/starts-with? line "dir ")
-        (z/append-child zp [(string/replace line "dir " "") 0])
+        (z/append-child zp {:path (string/replace line "dir " "") :size 0 :children []})
 
         (re-matches #"^\d+\s.*" line)
         (z/append-child zp (read-file-description line))
-
+        
         :else zp))
 
 
 (as-> sample-input $
   (string/split-lines $)
   (reduce run-cmd ;; Builds directory structure as vector tree
-          (z/vector-zip ["/" 0])
+          (z/zipper #(contains? % :children) :children #(assoc %1 :children %2) [{:path "/" :size 0 :children []}])
           (drop 1 $))
-  (z/root $) ;; return to root of tree
-  (dir-size $)
-  #_(drop-while z/branch? $)
+  (z/root $)
+  #_(z/root $) ;; return to root of tree
+  #_(z/node $)
+  #_(iterate z/next $)
+  #_(take 2 $)
+  #_(take-while (comp not z/end?) $)
   #_(reduce (fn [acc line] ;; Here we calculate and collect directory sizes
-            (z/next))
-          {:zp $ :size 0}
-          $))
+              (z/next))
+            {:zp $ :sizeize 0}
+            $))
 
 
 (comment
