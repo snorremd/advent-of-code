@@ -63,9 +63,9 @@ $ ls
 (as-> sample-input $
   (string/split-lines $)
   (reduce run-cmd ;; Builds directory structure as vector tree
-          (z/zipper #(contains? % :children) :children #(assoc %1 :children %2) [{:path "/" :size 0 :children []}])
+          (z/zipper #(contains? % :children) :children #(assoc %1 :children %2) {:path "/" :size 0 :children []})
           (drop 1 $))
-  (z/root $)
+  (z/up $)
   #_(z/root $) ;; return to root of tree
   #_(z/node $)
   #_(iterate z/next $)
