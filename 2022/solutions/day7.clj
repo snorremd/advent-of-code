@@ -29,6 +29,11 @@ $ ls
 
 (def input (slurp "input/day7.txt"))
 
+(defn backwalk [f loc]
+  (if (nil? (z/prev loc))
+    (f loc)
+    (recur f (z/prev (f loc)))))
+
 (defn read-file-description
     [line] 
     (let [[size filename] (string/split line #" ")]
@@ -36,62 +41,66 @@ $ ls
 
 (defn go-to-child
   "Returns the zipper at the child node's location."
-  [zipper child]
-  (->> zipper
+  [loc child]
+  (->> loc
        z/down
        (iterate z/right)
-       (drop-while #(or (not (z/branch? %))
-                        (not= (-> % z/node :path) child)))
+       (drop-while #(not= (-> % z/node :path) child))
        first))
 
-(defn run-cmd [zp line]
+(defn run-cmd [loc line]
   (cond (= line "$ cd ..")
-        (z/up zp)
+        (z/up loc)
 
         (string/starts-with? line "$ cd ")
-        (go-to-child zp (string/replace line "$ cd " ""))
+        (go-to-child loc (string/replace line "$ cd " ""))
 
         (string/starts-with? line "dir ")
-        (z/append-child zp {:path (string/replace line "dir " "") :size 0 :children []})
+        (z/append-child loc {:path (string/replace line "dir " "") :size 0 :children []})
 
         (re-matches #"^\d+\s.*" line)
-        (z/append-child zp (read-file-description line))
+        (z/append-child loc (read-file-description line))
         
-        :else zp))
+        :else loc))
 
+(defn calculate-size
+  [loc]
+  (if (z/branch? loc)
+    (z/edit loc
+            #(assoc %1 :size %2)
+            (->> loc z/node :children (map :size) (reduce +)))
+    loc))
 
-(as-> sample-input $
-  (string/split-lines $)
-  (reduce run-cmd ;; Builds directory structure as vector tree
-          (z/zipper #(contains? % :children) :children #(assoc %1 :children %2) {:path "/" :size 0 :children []})
-          (drop 1 $))
-  (z/up $)
-  #_(z/root $) ;; return to root of tree
-  #_(z/node $)
-  #_(iterate z/next $)
-  #_(take 2 $)
-  #_(take-while (comp not z/end?) $)
-  #_(reduce (fn [acc line] ;; Here we calculate and collect directory sizes
-              (z/next))
-            {:zp $ :sizeize 0}
-            $))
+(defn build-directories
+  [input]
+  (as-> input $
+    (string/split-lines $)
+    (reduce run-cmd ;; Builds directory structure as vector tree
+            (z/zipper #(contains? % :children) :children #(assoc %1 :children %2) {:path "/" :size 0 :children []})
+            (drop 1 $))
+    (backwalk calculate-size $)))
 
+(as-> input $
+  (build-directories $)
+  (iterate z/next $)
+  (take-while (comp not z/end?) $)
+  (filter z/branch? $) 
+  (map (comp :size z/node) $)
+  (filter #(<= % 100000) $)
+  (reduce + $)
+  (println "Part 1:" $))
 
-(comment
-  fs
-  (as-> zp zp
-    (z/append-child zp ["a" []])
-    (z/append-child zp ["b.txt" 14848514])
-    (z/append-child zp ["c.dat" 8504156])
-    (z/append-child zp ["d" []])
-    (go-to-child zp "d")
-    (z/node zp))
-
-  #_(z/append-child zp ["e"])
-  #_(z/append-child zp ["f" 29116])
-  #_(z/append-child zp ["g" 2557])
-  #_(z/append-child zp ["h.lst" 62596])
-  #_(z/up zp)
-  #_(z/root zp)
-  )
+(as-> input $
+  (build-directories $)
+  (let [remaining (- 70000000 (-> $ z/node :size))
+        missing (- 30000000 remaining)]
+    (->> $ (iterate z/next)
+         (take-while (comp not z/end?))
+         (filter z/branch?)
+         (filter #(>= (->> % z/node :size) missing))
+         (sort-by (comp :size z/node)) 
+         first
+         z/node
+         :size))
+  (println "Part 2:" $))
   
