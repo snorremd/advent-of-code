@@ -10,8 +10,9 @@
 
 (def input (slurp "input/day8.txt"))
 
-(defn take-until [p s]
+(defn take-until 
   "Borrowed from clojure wiki https://ask.clojure.org/index.php/2777/add-take-until?show=2969#a2969"
+  [p s]
   (transduce (halt-when p (fn [r h] (conj r h))) conj [] s))
 
 (defn coords [x1 x2 y1 y2]
