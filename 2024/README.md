@@ -4,6 +4,15 @@ This year I decided to try my hands at the Advent of Code challenges using Go.
 I've been using Go on and off for some simple projects.
 Advent of Code is a good way to get some practice, and hopefully learn some new tricks.
 
+<!-- benchmarks -->
+
+| Day | Part 1 | Part 2 | Stars |
+| --- | ------ | ------ | ----- |
+| 1 | [106µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part1.go) | [156µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part2.go) | ⭐⭐ |
+| 2 | [198µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part1.go) | [241µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part2.go) | ⭐⭐ |
+
+<!-- /benchmarks -->
+
 ## Running the code
 
 The go code is structured around a main.go file which contains commands to run solutions and benchmarks.
@@ -14,12 +23,6 @@ To run a solution, use the following command:
 
 ```bash
 go run main.go solution --day X --part Y
-```
-
-To run benchmarking for a solution, use the following command:
-
-```bash
-go run main.go benchmark --day X --part Y
 ```
 
 ## Benchmarks
@@ -39,12 +42,3 @@ Run all benchmarks and update the table below with the results:
 ```bash
 go run main.go update-readme-benchmarks
 ```
-
-<!-- benchmarks -->
-
-| Day | Part 1 | Part 2 | Stars |
-| --- | ------ | ------ | ----- |
-| 1 | [117µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part1.go) | [169µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part2.go) | ⭐⭐ |
-| 2 | [213µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part1.go) | [302µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part2.go) | ⭐⭐ |
-
-<!-- /benchmarks -->
