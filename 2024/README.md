@@ -44,6 +44,7 @@ go run main.go update-readme-benchmarks
 
 | Day | Part 1 | Part 2 | Stars |
 | --- | ------ | ------ | ----- |
-| 1 | [111µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part1.go) | [150µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part2.go) | ⭐⭐ |
+| 1 | [117µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part1.go) | [169µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part2.go) | ⭐⭐ |
+| 2 | [213µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part1.go) | [302µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part2.go) | ⭐⭐ |
 
 <!-- /benchmarks -->
