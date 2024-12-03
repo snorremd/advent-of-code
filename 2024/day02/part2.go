@@ -1,4 +1,4 @@
-package day2
+package day02
 
 import (
 	"aoc2023/utils"
@@ -9,7 +9,7 @@ import (
 
 func Part2() string {
 	// Read the input file
-	lines := utils.ReadLines("./day2/input.txt")
+	lines := utils.ReadLines("./day02/input.txt")
 
 	// Keep track of the number of safe reports
 	safeReports := 0

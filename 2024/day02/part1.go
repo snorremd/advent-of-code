@@ -1,4 +1,4 @@
-package day2
+package day02
 
 import (
 	"aoc2023/utils"
@@ -9,7 +9,7 @@ import (
 
 func Part1() string {
 	// Read the input file
-	lines := utils.ReadLines("./day2/input.txt")
+	lines := utils.ReadLines("./day02/input.txt")
 
 	// Each line is a sequence of numbers denoting reactor report
 	// If the numbers are either all increasing or decreasing they are safe granted that

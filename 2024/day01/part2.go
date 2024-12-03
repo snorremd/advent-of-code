@@ -1,4 +1,4 @@
-package day1
+package day01
 
 import (
 	"aoc2023/utils"
@@ -8,7 +8,7 @@ import (
 
 func Part2() string {
 	// Read the input file
-	lines := utils.ReadLines("./day1/input.txt")
+	lines := utils.ReadLines("./day01/input.txt")
 
 	// Create two lists to store the left and right numbers
 	leftList := []int{}
