@@ -8,9 +8,10 @@ Advent of Code is a good way to get some practice, and hopefully learn some new 
 
 | Day | Part 1 | Part 2 | Stars |
 | --- | ------ | ------ | ----- |
-| 1 | [112µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part1.go) | [162µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part2.go) | ⭐⭐ |
-| 2 | [207µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part1.go) | [300µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part2.go) | ⭐⭐ |
-| 3 | [173µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day3/part1.go) | [174µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day3/part2.go) | ⭐⭐ |
+| 1 | [106µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part1.go) | [157µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day1/part2.go) | ⭐⭐ |
+| 2 | [194µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part1.go) | [225µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day2/part2.go) | ⭐⭐ |
+| 3 | [168µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day3/part1.go) | [172µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day3/part2.go) | ⭐⭐ |
+| 4 | [398µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day4/part1.go) | [305µs](https://github.com/snorremd/advent-of-code/blob/main/2024/day4/part2.go) | ⭐⭐ |
 
 <!-- /benchmarks -->
 

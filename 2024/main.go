@@ -9,6 +9,7 @@ import (
 	"aoc2023/day01"
 	"aoc2023/day02"
 	"aoc2023/day03"
+	"aoc2023/day04"
 	"aoc2023/utils"
 
 	"github.com/urfave/cli/v3"
@@ -33,6 +34,12 @@ var solutions = []utils.Problem{
 		Name:  "Day 3: Mull it over",
 		Part1: day03.Part1,
 		Part2: day03.Part2,
+	},
+	{
+		Day:   4,
+		Name:  "Day 4: Ceres Search",
+		Part1: day04.Part1,
+		Part2: day04.Part2,
 	},
 }
 
